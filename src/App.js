@@ -5,8 +5,8 @@ import Game from "./components/Game";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import PrivateRouter from "./pages/PrivateRouter";
 import Login from "./pages/Login";
-// const socket = io.connect('https://tictactoebackend-production.up.railway.app')
-const socket = io.connect('http://localhost:8000')
+const socket = io.connect('https://tictactoebackend-production.up.railway.app')
+// const socket = io.connect('http://localhost:8000')
 function App() {
 
 
