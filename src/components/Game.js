@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Board from './Board';
 import {message} from "antd";
+import {LogoutOutlined} from "@ant-design/icons";
 
 const Game = ({socket}) => {
     const user = JSON.parse(localStorage.getItem('userTicTac'))
@@ -48,19 +49,17 @@ const Game = ({socket}) => {
 
     const [page, setPage] = useState(['create-join'])
 
+    const logOut = () => {
+        localStorage.removeItem('userTicTac')
+        window.location.reload()
+    }
+
     return (
         <div className="game">
             <div>
-                {/*<div className="mt-3 d-flex justify-content-center">*/}
-                {/*    <div className="btn-group">*/}
-                {/*        <button onClick={() => createRoom()} className="btn btn-primary">*/}
-                {/*            Create room*/}
-                {/*        </button>*/}
-                {/*        <button className="btn btn-success" onClick={()=>setWantToJoin(true)}>*/}
-                {/*            Join room*/}
-                {/*        </button>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                <div className="d-flex mb-3 justify-content-end">
+                    <button className="btn btn-danger d-flex align-items-center"><LogoutOutlined style={{marginRight:"8px"}}/> LogOut</button>
+                </div>
                 {
                     page.includes('create-join') ?
                         <div className="create-and-join-page">
