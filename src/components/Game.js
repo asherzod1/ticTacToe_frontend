@@ -13,6 +13,7 @@ const Game = ({socket}) => {
 
     const joinRoom = (roomId) => {
         socket.emit('join_room', {roomId, userId: user?.id})
+        console.log("Joining room", roomId)
         setRoom(roomId)
     }
     const sendMessage = () => {

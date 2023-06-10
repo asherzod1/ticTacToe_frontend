@@ -101,12 +101,12 @@ const Board = ({socket, room, user, setRoom, page, setPage}) => {
             console.log("Start game", data)
             setPage(['started'])
             setMe(data.youAre)
-            setSquares(Array(9).fill(null))
             socket.emit("create_user_room", {
                 room: data.roomId,
                 user: user?.id,
                 isX: data.youAre === "X" ? true : false
             })
+            setXIsNext(true)
         })
 
         socket.on("start_dont_finished_game", (data)=>{
@@ -129,6 +129,7 @@ const Board = ({socket, room, user, setRoom, page, setPage}) => {
         socket.emit("leave_room", {room: room})
         setPage(['create-join'])
         setRoom(null)
+        setSquares(Array(9).fill(null))
     }
 
     return (
