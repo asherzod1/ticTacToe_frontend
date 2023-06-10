@@ -58,7 +58,7 @@ const Game = ({socket}) => {
         <div className="game">
             <div>
                 <div className="d-flex mb-3 justify-content-end">
-                    <button className="btn btn-danger d-flex align-items-center"><LogoutOutlined style={{marginRight:"8px"}}/> LogOut</button>
+                    <button onClick={()=>logOut()} className="btn btn-danger d-flex align-items-center"><LogoutOutlined style={{marginRight:"8px"}}/> LogOut</button>
                 </div>
                 {
                     page.includes('create-join') ?
