@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Square from './Square';
 import button from "bootstrap/js/src/button";
 import {ArrowLeftOutlined} from "@ant-design/icons";
+import {message} from "antd";
 
 
 const calculateWinner = (squares) => {
@@ -119,6 +120,11 @@ const Board = ({socket, room, user, setRoom, page, setPage}) => {
             setDontFinishedGames(data)
         })
 
+        socket.on('user_left',()=>{
+            message.error("Your opponent left the game")
+            leaveRoom()
+        })
+
     }, [socket])
 
     useEffect(() => {
@@ -132,6 +138,10 @@ const Board = ({socket, room, user, setRoom, page, setPage}) => {
         setSquares(Array(9).fill(null))
     }
 
+    const getOpponent = (roomObjId) => {
+        socket.emit("get_opponent", {room: roomObjId, user: user?.id})
+    }
+
     return (
         <div>
             {
@@ -143,7 +153,12 @@ const Board = ({socket, room, user, setRoom, page, setPage}) => {
                             {
                                 dontFinishedGames.map((game, index) => (
                                     <div onClick={()=>joinDonFinishedGame(game)} className="dont-finished-game">
-                                        <h6 >Room ID: {game.roomId}</h6>
+                                        <h6 >Room ID: {game.roomId}
+                                        <br />
+                                            <span style={{fontWeight:"400", fontSize:"13px"}}>
+                                                opponent: <span style={{color:"red"}}>{game.opponentUser.name}</span>
+                                            </span>
+                                        </h6>
                                     </div>
                                 ))
                             }
